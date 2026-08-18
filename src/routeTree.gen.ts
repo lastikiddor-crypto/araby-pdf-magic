@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ImageToPdfRouteImport } from './routes/image-to-pdf'
 import { Route as MergeRouteImport } from './routes/merge'
+import { Route as PdfToTextRouteImport } from './routes/pdf-to-text'
 import { Route as SplitRouteImport } from './routes/split'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const MergeRoute = MergeRouteImport.update({
   path: '/merge',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PdfToTextRoute = PdfToTextRouteImport.update({
+  id: '/pdf-to-text',
+  path: '/pdf-to-text',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SplitRoute = SplitRouteImport.update({
   id: '/split',
   path: '/split',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/image-to-pdf': typeof ImageToPdfRoute
   '/merge': typeof MergeRoute
+  '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/image-to-pdf': typeof ImageToPdfRoute
   '/merge': typeof MergeRoute
+  '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/image-to-pdf': typeof ImageToPdfRoute
   '/merge': typeof MergeRoute
+  '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/image-to-pdf' | '/merge' | '/split'
+  fullPaths: '/' | '/image-to-pdf' | '/merge' | '/pdf-to-text' | '/split'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/image-to-pdf' | '/merge' | '/split'
-  id: '__root__' | '/' | '/image-to-pdf' | '/merge' | '/split'
+  to: '/' | '/image-to-pdf' | '/merge' | '/pdf-to-text' | '/split'
+  id: '__root__' | '/' | '/image-to-pdf' | '/merge' | '/pdf-to-text' | '/split'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ImageToPdfRoute: typeof ImageToPdfRoute
   MergeRoute: typeof MergeRoute
+  PdfToTextRoute: typeof PdfToTextRoute
   SplitRoute: typeof SplitRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MergeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pdf-to-text': {
+      id: '/pdf-to-text'
+      path: '/pdf-to-text'
+      fullPath: '/pdf-to-text'
+      preLoaderRoute: typeof PdfToTextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/split': {
       id: '/split'
       path: '/split'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ImageToPdfRoute: ImageToPdfRoute,
   MergeRoute: MergeRoute,
+  PdfToTextRoute: PdfToTextRoute,
   SplitRoute: SplitRoute,
 }
 export const routeTree = rootRouteImport
