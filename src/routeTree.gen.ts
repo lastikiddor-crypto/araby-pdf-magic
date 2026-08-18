@@ -14,6 +14,7 @@ import { Route as ImageToPdfRouteImport } from './routes/image-to-pdf'
 import { Route as MergeRouteImport } from './routes/merge'
 import { Route as PdfToTextRouteImport } from './routes/pdf-to-text'
 import { Route as SplitRouteImport } from './routes/split'
+import { Route as ViewerRouteImport } from './routes/viewer'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const SplitRoute = SplitRouteImport.update({
   path: '/split',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ViewerRoute = ViewerRouteImport.update({
+  id: '/viewer',
+  path: '/viewer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/merge': typeof MergeRoute
   '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
+  '/viewer': typeof ViewerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/merge': typeof MergeRoute
   '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
+  '/viewer': typeof ViewerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,22 @@ export interface FileRoutesById {
   '/merge': typeof MergeRoute
   '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
+  '/viewer': typeof ViewerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/image-to-pdf' | '/merge' | '/pdf-to-text' | '/split'
+  fullPaths:
+    '/' | '/image-to-pdf' | '/merge' | '/pdf-to-text' | '/split' | '/viewer'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/image-to-pdf' | '/merge' | '/pdf-to-text' | '/split'
-  id: '__root__' | '/' | '/image-to-pdf' | '/merge' | '/pdf-to-text' | '/split'
+  to: '/' | '/image-to-pdf' | '/merge' | '/pdf-to-text' | '/split' | '/viewer'
+  id:
+    | '__root__'
+    | '/'
+    | '/image-to-pdf'
+    | '/merge'
+    | '/pdf-to-text'
+    | '/split'
+    | '/viewer'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +94,7 @@ export interface RootRouteChildren {
   MergeRoute: typeof MergeRoute
   PdfToTextRoute: typeof PdfToTextRoute
   SplitRoute: typeof SplitRoute
+  ViewerRoute: typeof ViewerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +134,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SplitRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/viewer': {
+      id: '/viewer'
+      path: '/viewer'
+      fullPath: '/viewer'
+      preLoaderRoute: typeof ViewerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +150,7 @@ const rootRouteChildren: RootRouteChildren = {
   MergeRoute: MergeRoute,
   PdfToTextRoute: PdfToTextRoute,
   SplitRoute: SplitRoute,
+  ViewerRoute: ViewerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
