@@ -117,6 +117,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
           <p className="truncate text-sm font-semibold sm:text-base">{t("tagline")}</p>
 
           <div className="ms-auto flex items-center gap-2">
+            <InstallButton />
             <button
               onClick={toggle}
               className="flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 text-sm font-semibold transition-colors hover:bg-muted"
