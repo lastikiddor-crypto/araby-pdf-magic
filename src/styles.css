@@ -43,6 +43,14 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-omni-bg: var(--omni-bg);
+  --color-omni-surface: var(--omni-surface);
+  --color-omni-elevated: var(--omni-elevated);
+  --color-omni-accent: var(--omni-accent);
+  --color-omni-accent-hover: var(--omni-accent-hover);
+  --color-omni-text: var(--omni-text);
+  --color-omni-text-muted: var(--omni-text-muted);
+  --color-omni-border: var(--omni-border);
 }
 
 :root {
@@ -111,6 +119,14 @@
   --sidebar-border: oklch(1 0 0 / 12%);
   --sidebar-ring: oklch(0.72 0.13 168);
   --shadow-soft: 0 12px 40px -18px oklch(0 0 0 / 70%);
+  --omni-bg: #0a0a0a;
+  --omni-surface: #141414;
+  --omni-elevated: #1c1c1c;
+  --omni-accent: #ff2d2d;
+  --omni-accent-hover: #ff4d4d;
+  --omni-text: #f5f5f5;
+  --omni-text-muted: #9ca3af;
+  --omni-border: rgba(255, 255, 255, 0.08);
 }
 
 @layer base {
