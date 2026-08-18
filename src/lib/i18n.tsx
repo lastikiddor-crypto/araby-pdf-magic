@@ -27,6 +27,12 @@ const dict = {
   theme_dark: { ar: "الوضع الليلي", en: "Dark mode" },
   theme_light: { ar: "الوضع النهاري", en: "Light mode" },
   open_menu: { ar: "فتح القائمة", en: "Open menu" },
+  install_app: { ar: "تثبيت التطبيق", en: "Install App" },
+  install_ios_hint: {
+    ar: "لتثبيت التطبيق: اضغط على زر المشاركة في سفاري، ثم اختر «إضافة إلى الشاشة الرئيسية».",
+    en: "To install: tap the Share button in Safari, then choose “Add to Home Screen”.",
+  },
+  close: { ar: "إغلاق", en: "Close" },
 
   hero_cta: { ar: "ابدأ الآن", en: "Get started" },
   hero_secondary: { ar: "استعرض الأدوات", en: "Browse tools" },
