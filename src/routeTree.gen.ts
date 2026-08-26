@@ -16,6 +16,7 @@ import { Route as OmniRouteImport } from './routes/omni'
 import { Route as PdfToTextRouteImport } from './routes/pdf-to-text'
 import { Route as SplitRouteImport } from './routes/split'
 import { Route as ViewerRouteImport } from './routes/viewer'
+import { Route as WatermarkRouteImport } from './routes/watermark'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const ViewerRoute = ViewerRouteImport.update({
   path: '/viewer',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WatermarkRoute = WatermarkRouteImport.update({
+  id: '/watermark',
+  path: '/watermark',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
   '/viewer': typeof ViewerRoute
+  '/watermark': typeof WatermarkRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
   '/viewer': typeof ViewerRoute
+  '/watermark': typeof WatermarkRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
   '/viewer': typeof ViewerRoute
+  '/watermark': typeof WatermarkRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/pdf-to-text'
     | '/split'
     | '/viewer'
+    | '/watermark'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/pdf-to-text'
     | '/split'
     | '/viewer'
+    | '/watermark'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/pdf-to-text'
     | '/split'
     | '/viewer'
+    | '/watermark'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   PdfToTextRoute: typeof PdfToTextRoute
   SplitRoute: typeof SplitRoute
   ViewerRoute: typeof ViewerRoute
+  WatermarkRoute: typeof WatermarkRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ViewerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/watermark': {
+      id: '/watermark'
+      path: '/watermark'
+      fullPath: '/watermark'
+      preLoaderRoute: typeof WatermarkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   PdfToTextRoute: PdfToTextRoute,
   SplitRoute: SplitRoute,
   ViewerRoute: ViewerRoute,
+  WatermarkRoute: WatermarkRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

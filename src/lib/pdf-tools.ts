@@ -136,7 +136,7 @@ export async function compressPdf(file: File, quality = 0.6, scale = 1.2): Promi
     const ctx = canvas.getContext("2d")!;
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    await page.render({ canvasContext: ctx, viewport, canvas }).promise;
+    await page.render({ canvasContext: ctx, viewport } as never).promise;
     const jpg = await out.embedJpg(dataUrlToBytes(canvas.toDataURL("image/jpeg", quality)));
     const target = out.addPage([viewport.width / scale, viewport.height / scale]);
     target.drawImage(jpg, { x: 0, y: 0, width: target.getWidth(), height: target.getHeight() });
