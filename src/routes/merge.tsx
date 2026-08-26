@@ -12,7 +12,7 @@ export const Route = createFileRoute("/merge")({
   head: () => ({
     meta: [
       { title: "دمج ملفات PDF — SmartPDF Studio" },
-      { name: "description", content: "ادمج عدة ملفات PDF في مستند واحد داخل المتصفح مجانًا." },
+      { name: "description", content: "ادمج عدة ملفات PDF في مستند واحد مع ترتيب مرن للصفحات." },
       { property: "og:title", content: "Merge PDFs — SmartPDF Studio" },
       { property: "og:description", content: "Combine multiple PDF files into one, locally." },
     ],

@@ -2,11 +2,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
   ArrowRight,
+  Droplets,
   FileText,
+  Hash,
+  Minimize2,
+  RotateCw,
   Files,
   Image as ImageIcon,
   Scissors,
-  ShieldCheck,
   Signature,
 } from "lucide-react";
 
@@ -16,16 +19,16 @@ import { useI18n, type TKey } from "@/lib/i18n";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "SmartPDF Studio — أدوات PDF في متصفحك" },
+      { title: "SmartPDF Studio — أدوات PDF احترافية" },
       {
         name: "description",
         content:
-          "دمج وتقسيم وتوقيع وتحويل ملفات PDF مباشرة في المتصفح، بالعربية والإنجليزية، دون رفع أي ملف.",
+          "دمج وتقسيم وتوقيع وضغط وتحويل ملفات PDF بواجهة عربية وإنجليزية حديثة.",
       },
-      { property: "og:title", content: "SmartPDF Studio — أدوات PDF في متصفحك" },
+      { property: "og:title", content: "SmartPDF Studio — أدوات PDF احترافية" },
       {
         property: "og:description",
-        content: "Merge, split, sign and convert PDFs locally. Arabic & English interface.",
+        content: "Merge, split, sign, compress and convert PDFs. Arabic & English interface.",
       },
     ],
   }),
@@ -39,6 +42,10 @@ const tools: { to: string; key: TKey; desc: TKey; icon: typeof FileText }[] = [
   { to: "/image-to-pdf", key: "nav_image", desc: "card_image_desc", icon: ImageIcon },
   { to: "/pdf-to-text", key: "nav_text", desc: "card_text_desc", icon: FileText },
   { to: "/viewer", key: "sign_title", desc: "card_sign_desc", icon: Signature },
+  { to: "/watermark", key: "nav_watermark", desc: "card_watermark_desc", icon: Droplets },
+  { to: "/organize", key: "nav_organize", desc: "card_organize_desc", icon: RotateCw },
+  { to: "/compress", key: "nav_compress", desc: "card_compress_desc", icon: Minimize2 },
+  { to: "/page-numbers", key: "nav_numbers", desc: "card_numbers_desc", icon: Hash },
 ];
 
 function Dashboard() {
@@ -70,11 +77,6 @@ function Dashboard() {
         <div className="pointer-events-none absolute -end-16 -top-16 size-72 rounded-full bg-primary-foreground/10" />
         <div className="pointer-events-none absolute -bottom-24 end-24 size-64 rounded-full bg-primary-foreground/10" />
       </section>
-
-      <div className="mt-6 flex items-center gap-2 rounded-2xl border border-border bg-card p-4 text-sm text-muted-foreground">
-        <ShieldCheck className="size-5 shrink-0 text-primary" />
-        {t("privacy_note")}
-      </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {tools.map(({ to, key, desc, icon: Icon }) => (

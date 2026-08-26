@@ -12,7 +12,7 @@ export const Route = createFileRoute("/split")({
   head: () => ({
     meta: [
       { title: "تقسيم ملف PDF — SmartPDF Studio" },
-      { name: "description", content: "استخرج صفحات محددة من ملف PDF إلى مستند جديد داخل المتصفح." },
+      { name: "description", content: "استخرج صفحات محددة من ملف PDF إلى مستند جديد بسهولة." },
       { property: "og:title", content: "Split PDF — SmartPDF Studio" },
       { property: "og:description", content: "Extract specific pages from a PDF into a new file." },
     ],

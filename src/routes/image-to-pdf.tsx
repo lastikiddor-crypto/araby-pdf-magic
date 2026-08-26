@@ -12,7 +12,7 @@ export const Route = createFileRoute("/image-to-pdf")({
   head: () => ({
     meta: [
       { title: "تحويل الصور إلى PDF — SmartPDF Studio" },
-      { name: "description", content: "حوّل صور JPG و PNG إلى ملف PDF واحد بسهولة داخل المتصفح." },
+      { name: "description", content: "حوّل صور JPG و PNG إلى ملف PDF واحد بجودة عالية." },
       { property: "og:title", content: "Image to PDF — SmartPDF Studio" },
       { property: "og:description", content: "Convert JPG and PNG images into a single PDF." },
     ],

@@ -1,6 +1,10 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
+  Droplets,
   FileText,
+  Hash,
+  Minimize2,
+  RotateCw,
   Files,
   Image as ImageIcon,
   LayoutDashboard,
@@ -26,6 +30,10 @@ const links: { to: string; key: TKey; icon: typeof FileText }[] = [
   { to: "/split", key: "nav_split", icon: Scissors },
   { to: "/image-to-pdf", key: "nav_image", icon: ImageIcon },
   { to: "/pdf-to-text", key: "nav_text", icon: FileText },
+  { to: "/watermark", key: "nav_watermark", icon: Droplets },
+  { to: "/organize", key: "nav_organize", icon: RotateCw },
+  { to: "/compress", key: "nav_compress", icon: Minimize2 },
+  { to: "/page-numbers", key: "nav_numbers", icon: Hash },
 ];
 
 function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
@@ -66,9 +74,6 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         })}
       </nav>
 
-      <p className="mt-auto rounded-xl bg-sidebar-accent p-3 text-xs leading-relaxed text-sidebar-accent-foreground">
-        {t("privacy_note")}
-      </p>
     </div>
   );
 }
