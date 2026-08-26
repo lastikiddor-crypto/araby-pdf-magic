@@ -10,16 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CompressRouteImport } from './routes/compress'
 import { Route as ImageToPdfRouteImport } from './routes/image-to-pdf'
 import { Route as MergeRouteImport } from './routes/merge'
 import { Route as OmniRouteImport } from './routes/omni'
+import { Route as OrganizeRouteImport } from './routes/organize'
 import { Route as PdfToTextRouteImport } from './routes/pdf-to-text'
 import { Route as SplitRouteImport } from './routes/split'
 import { Route as ViewerRouteImport } from './routes/viewer'
+import { Route as WatermarkRouteImport } from './routes/watermark'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompressRoute = CompressRouteImport.update({
+  id: '/compress',
+  path: '/compress',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImageToPdfRoute = ImageToPdfRouteImport.update({
@@ -37,6 +45,11 @@ const OmniRoute = OmniRouteImport.update({
   path: '/omni',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrganizeRoute = OrganizeRouteImport.update({
+  id: '/organize',
+  path: '/organize',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PdfToTextRoute = PdfToTextRouteImport.update({
   id: '/pdf-to-text',
   path: '/pdf-to-text',
@@ -52,73 +65,99 @@ const ViewerRoute = ViewerRouteImport.update({
   path: '/viewer',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WatermarkRoute = WatermarkRouteImport.update({
+  id: '/watermark',
+  path: '/watermark',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/compress': typeof CompressRoute
   '/image-to-pdf': typeof ImageToPdfRoute
   '/merge': typeof MergeRoute
   '/omni': typeof OmniRoute
+  '/organize': typeof OrganizeRoute
   '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
   '/viewer': typeof ViewerRoute
+  '/watermark': typeof WatermarkRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/compress': typeof CompressRoute
   '/image-to-pdf': typeof ImageToPdfRoute
   '/merge': typeof MergeRoute
   '/omni': typeof OmniRoute
+  '/organize': typeof OrganizeRoute
   '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
   '/viewer': typeof ViewerRoute
+  '/watermark': typeof WatermarkRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/compress': typeof CompressRoute
   '/image-to-pdf': typeof ImageToPdfRoute
   '/merge': typeof MergeRoute
   '/omni': typeof OmniRoute
+  '/organize': typeof OrganizeRoute
   '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
   '/viewer': typeof ViewerRoute
+  '/watermark': typeof WatermarkRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/compress'
     | '/image-to-pdf'
     | '/merge'
     | '/omni'
+    | '/organize'
     | '/pdf-to-text'
     | '/split'
     | '/viewer'
+    | '/watermark'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/compress'
     | '/image-to-pdf'
     | '/merge'
     | '/omni'
+    | '/organize'
     | '/pdf-to-text'
     | '/split'
     | '/viewer'
+    | '/watermark'
   id:
     | '__root__'
     | '/'
+    | '/compress'
     | '/image-to-pdf'
     | '/merge'
     | '/omni'
+    | '/organize'
     | '/pdf-to-text'
     | '/split'
     | '/viewer'
+    | '/watermark'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CompressRoute: typeof CompressRoute
   ImageToPdfRoute: typeof ImageToPdfRoute
   MergeRoute: typeof MergeRoute
   OmniRoute: typeof OmniRoute
+  OrganizeRoute: typeof OrganizeRoute
   PdfToTextRoute: typeof PdfToTextRoute
   SplitRoute: typeof SplitRoute
   ViewerRoute: typeof ViewerRoute
+  WatermarkRoute: typeof WatermarkRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -128,6 +167,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compress': {
+      id: '/compress'
+      path: '/compress'
+      fullPath: '/compress'
+      preLoaderRoute: typeof CompressRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/image-to-pdf': {
@@ -151,6 +197,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OmniRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/organize': {
+      id: '/organize'
+      path: '/organize'
+      fullPath: '/organize'
+      preLoaderRoute: typeof OrganizeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pdf-to-text': {
       id: '/pdf-to-text'
       path: '/pdf-to-text'
@@ -172,17 +225,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ViewerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/watermark': {
+      id: '/watermark'
+      path: '/watermark'
+      fullPath: '/watermark'
+      preLoaderRoute: typeof WatermarkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CompressRoute: CompressRoute,
   ImageToPdfRoute: ImageToPdfRoute,
   MergeRoute: MergeRoute,
   OmniRoute: OmniRoute,
+  OrganizeRoute: OrganizeRoute,
   PdfToTextRoute: PdfToTextRoute,
   SplitRoute: SplitRoute,
   ViewerRoute: ViewerRoute,
+  WatermarkRoute: WatermarkRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

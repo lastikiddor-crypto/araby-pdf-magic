@@ -1,4 +1,4 @@
-import { PDFDocument, degrees } from "pdf-lib";
+import { PDFDocument, StandardFonts, degrees, rgb } from "pdf-lib";
 
 export function downloadBlob(data: Uint8Array | Blob, filename: string) {
   const blob = data instanceof Blob ? data : new Blob([data as BlobPart], { type: "application/pdf" });
@@ -67,4 +67,99 @@ export async function imagesToPdf(files: File[]): Promise<Uint8Array> {
     page.setRotation(degrees(0));
   }
   return out.save();
+}
+
+function dataUrlToBytes(dataUrl: string) {
+  return Uint8Array.from(atob(dataUrl.split(",")[1]!), (c) => c.charCodeAt(0));
+}
+
+/** Stamps a rotated, semi-transparent text watermark (any script) on every page. */
+export async function watermarkPdf(
+  file: File,
+  text: string,
+  opts: { opacity?: number; rotation?: number; color?: string } = {},
+): Promise<Uint8Array> {
+  const { textToImage } = await import("./pdfjs");
+  const { opacity = 0.2, rotation = 45, color = "#ef4444" } = opts;
+  const img = textToImage(text, 120, color);
+  const pdf = await PDFDocument.load(await file.arrayBuffer());
+  const png = await pdf.embedPng(dataUrlToBytes(img.dataUrl));
+  for (const page of pdf.getPages()) {
+    const { width, height } = page.getSize();
+    const w = width * 0.7;
+    const h = (img.height / img.width) * w;
+    page.drawImage(png, {
+      x: width / 2 - w / 2,
+      y: height / 2 - h / 2,
+      width: w,
+      height: h,
+      opacity,
+      rotate: degrees(rotation),
+    });
+  }
+  return pdf.save();
+}
+
+/** Rebuilds the document keeping only `keep` pages (1-based) with per-page rotation. */
+export async function organizePdf(
+  file: File,
+  keep: number[],
+  rotations: Record<number, number>,
+): Promise<Uint8Array | null> {
+  if (!keep.length) return null;
+  const src = await PDFDocument.load(await file.arrayBuffer());
+  const out = await PDFDocument.create();
+  const pages = await out.copyPages(
+    src,
+    keep.map((n) => n - 1),
+  );
+  pages.forEach((p, i) => {
+    const rot = rotations[keep[i]!] ?? 0;
+    p.setRotation(degrees(((p.getRotation().angle + rot) % 360 + 360) % 360));
+    out.addPage(p);
+  });
+  return out.save();
+}
+
+/** Re-renders every page as a JPEG at the given quality/scale to shrink file size. */
+export async function compressPdf(file: File, quality = 0.6, scale = 1.2): Promise<Uint8Array> {
+  const { loadPdfjs } = await import("./pdfjs");
+  const pdfjs = await loadPdfjs();
+  const doc = await pdfjs.getDocument({ data: new Uint8Array(await file.arrayBuffer()) }).promise;
+  const out = await PDFDocument.create();
+  for (let i = 1; i <= doc.numPages; i++) {
+    const page = await doc.getPage(i);
+    const viewport = page.getViewport({ scale });
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.ceil(viewport.width);
+    canvas.height = Math.ceil(viewport.height);
+    const ctx = canvas.getContext("2d")!;
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    await page.render({ canvasContext: ctx, viewport } as never).promise;
+    const jpg = await out.embedJpg(dataUrlToBytes(canvas.toDataURL("image/jpeg", quality)));
+    const target = out.addPage([viewport.width / scale, viewport.height / scale]);
+    target.drawImage(jpg, { x: 0, y: 0, width: target.getWidth(), height: target.getHeight() });
+  }
+  return out.save();
+}
+
+/** Draws sequential page numbers at the bottom of each page. */
+export async function addPageNumbers(
+  file: File,
+  position: "center" | "start" | "end" = "center",
+): Promise<Uint8Array> {
+  const pdf = await PDFDocument.load(await file.arrayBuffer());
+  const font = await pdf.embedFont(StandardFonts.Helvetica);
+  const pages = pdf.getPages();
+  pages.forEach((page, i) => {
+    const label = `${i + 1} / ${pages.length}`;
+    const size = 10;
+    const textWidth = font.widthOfTextAtSize(label, size);
+    const { width } = page.getSize();
+    const x =
+      position === "center" ? width / 2 - textWidth / 2 : position === "start" ? 40 : width - 40 - textWidth;
+    page.drawText(label, { x, y: 24, size, font, color: rgb(0.35, 0.35, 0.35) });
+  });
+  return pdf.save();
 }

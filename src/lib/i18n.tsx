@@ -13,8 +13,8 @@ export type Lang = "ar" | "en";
 const dict = {
   brand: { ar: "سمارت PDF ستوديو", en: "SmartPDF Studio" },
   tagline: {
-    ar: "كل أدوات الـ PDF في مكان واحد، داخل متصفحك",
-    en: "Every PDF tool you need, right in your browser",
+    ar: "كل أدوات الـ PDF الاحترافية في مكان واحد",
+    en: "Every professional PDF tool in one place",
   },
   nav_dashboard: { ar: "لوحة التحكم", en: "Dashboard" },
   nav_viewer: { ar: "العارض والتوقيع", en: "Viewer & Sign" },
@@ -22,6 +22,10 @@ const dict = {
   nav_split: { ar: "تقسيم الملف", en: "Split PDF" },
   nav_image: { ar: "صور إلى PDF", en: "Image to PDF" },
   nav_text: { ar: "PDF إلى نص", en: "PDF to Text" },
+  nav_watermark: { ar: "علامة مائية", en: "Watermark" },
+  nav_organize: { ar: "تنظيم الصفحات", en: "Organize pages" },
+  nav_compress: { ar: "ضغط PDF", en: "Compress PDF" },
+  nav_numbers: { ar: "ترقيم الصفحات", en: "Page numbers" },
   tools: { ar: "الأدوات", en: "Tools" },
   language: { ar: "اللغة", en: "Language" },
   theme_dark: { ar: "الوضع الليلي", en: "Dark mode" },
@@ -36,10 +40,6 @@ const dict = {
 
   hero_cta: { ar: "ابدأ الآن", en: "Get started" },
   hero_secondary: { ar: "استعرض الأدوات", en: "Browse tools" },
-  privacy_note: {
-    ar: "تتم معالجة جميع الملفات محليًا داخل متصفحك — لا يتم رفع أي شيء.",
-    en: "All files are processed locally in your browser — nothing is uploaded.",
-  },
 
   card_viewer_desc: {
     ar: "اعرض ملفاتك، تنقّل بين الصفحات، وكبّر أو صغّر بسهولة.",
@@ -119,6 +119,49 @@ const dict = {
   signature_needed: { ar: "احفظ توقيعك أولًا.", en: "Save your signature first." },
   invalid_pdf: { ar: "تعذّر قراءة الملف. تأكد من أنه PDF صالح.", en: "Could not read the file. Make sure it is a valid PDF." },
   done: { ar: "تم بنجاح", en: "Done" },
+
+  card_watermark_desc: {
+    ar: "أضف نص علامة مائية شفاف على كل صفحات الملف.",
+    en: "Stamp a translucent text watermark on every page.",
+  },
+  card_organize_desc: {
+    ar: "دوّر أو احذف صفحات محددة ثم احفظ نسخة جديدة.",
+    en: "Rotate or delete specific pages, then save a new copy.",
+  },
+  card_compress_desc: {
+    ar: "قلّل حجم ملف PDF مع الحفاظ على وضوح مقبول.",
+    en: "Reduce PDF file size while keeping decent clarity.",
+  },
+  card_numbers_desc: {
+    ar: "أضف أرقام الصفحات تلقائيًا أسفل كل صفحة.",
+    en: "Add sequential page numbers to the bottom of each page.",
+  },
+  watermark_text: { ar: "نص العلامة المائية", en: "Watermark text" },
+  watermark_placeholder: { ar: "مثال: نسخة سرية", en: "e.g. CONFIDENTIAL" },
+  watermark_opacity: { ar: "الشفافية", en: "Opacity" },
+  watermark_rotation: { ar: "زاوية الميل", en: "Rotation" },
+  watermark_color: { ar: "اللون", en: "Color" },
+  watermark_action: { ar: "إضافة العلامة المائية", en: "Add watermark" },
+  organize_action: { ar: "حفظ الملف الجديد", en: "Save new file" },
+  rotate_left: { ar: "تدوير لليسار", en: "Rotate left" },
+  rotate_right: { ar: "تدوير لليمين", en: "Rotate right" },
+  delete_page: { ar: "حذف الصفحة", en: "Delete page" },
+  restore_page: { ar: "استعادة الصفحة", en: "Restore page" },
+  organize_hint: { ar: "اختر الصفحات التي تريد حذفها أو تدويرها.", en: "Choose pages to delete or rotate." },
+  no_pages_left: { ar: "لا يمكن حذف كل الصفحات.", en: "You cannot delete every page." },
+  compress_quality: { ar: "جودة الضغط", en: "Compression quality" },
+  compress_action: { ar: "ضغط وتحميل", en: "Compress & download" },
+  size_before: { ar: "الحجم الأصلي", en: "Original size" },
+  size_after: { ar: "الحجم بعد الضغط", en: "Compressed size" },
+  compress_note: {
+    ar: "يتم تحويل الصفحات إلى صور، لذا لن يبقى النص قابلًا للتحديد.",
+    en: "Pages are converted to images, so text will no longer be selectable.",
+  },
+  numbers_position: { ar: "موضع الرقم", en: "Number position" },
+  pos_center: { ar: "الوسط", en: "Center" },
+  pos_start: { ar: "البداية", en: "Start" },
+  pos_end: { ar: "النهاية", en: "End" },
+  numbers_action: { ar: "إضافة الأرقام", en: "Add numbers" },
 } as const;
 
 export type TKey = keyof typeof dict;
