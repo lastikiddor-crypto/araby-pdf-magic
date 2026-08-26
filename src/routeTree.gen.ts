@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ImageToPdfRouteImport } from './routes/image-to-pdf'
 import { Route as MergeRouteImport } from './routes/merge'
 import { Route as OmniRouteImport } from './routes/omni'
+import { Route as OrganizeRouteImport } from './routes/organize'
 import { Route as PdfToTextRouteImport } from './routes/pdf-to-text'
 import { Route as SplitRouteImport } from './routes/split'
 import { Route as ViewerRouteImport } from './routes/viewer'
@@ -36,6 +37,11 @@ const MergeRoute = MergeRouteImport.update({
 const OmniRoute = OmniRouteImport.update({
   id: '/omni',
   path: '/omni',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrganizeRoute = OrganizeRouteImport.update({
+  id: '/organize',
+  path: '/organize',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PdfToTextRoute = PdfToTextRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/image-to-pdf': typeof ImageToPdfRoute
   '/merge': typeof MergeRoute
   '/omni': typeof OmniRoute
+  '/organize': typeof OrganizeRoute
   '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
   '/viewer': typeof ViewerRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/image-to-pdf': typeof ImageToPdfRoute
   '/merge': typeof MergeRoute
   '/omni': typeof OmniRoute
+  '/organize': typeof OrganizeRoute
   '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
   '/viewer': typeof ViewerRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/image-to-pdf': typeof ImageToPdfRoute
   '/merge': typeof MergeRoute
   '/omni': typeof OmniRoute
+  '/organize': typeof OrganizeRoute
   '/pdf-to-text': typeof PdfToTextRoute
   '/split': typeof SplitRoute
   '/viewer': typeof ViewerRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/image-to-pdf'
     | '/merge'
     | '/omni'
+    | '/organize'
     | '/pdf-to-text'
     | '/split'
     | '/viewer'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/image-to-pdf'
     | '/merge'
     | '/omni'
+    | '/organize'
     | '/pdf-to-text'
     | '/split'
     | '/viewer'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/image-to-pdf'
     | '/merge'
     | '/omni'
+    | '/organize'
     | '/pdf-to-text'
     | '/split'
     | '/viewer'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   ImageToPdfRoute: typeof ImageToPdfRoute
   MergeRoute: typeof MergeRoute
   OmniRoute: typeof OmniRoute
+  OrganizeRoute: typeof OrganizeRoute
   PdfToTextRoute: typeof PdfToTextRoute
   SplitRoute: typeof SplitRoute
   ViewerRoute: typeof ViewerRoute
@@ -162,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/omni'
       fullPath: '/omni'
       preLoaderRoute: typeof OmniRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/organize': {
+      id: '/organize'
+      path: '/organize'
+      fullPath: '/organize'
+      preLoaderRoute: typeof OrganizeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pdf-to-text': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImageToPdfRoute: ImageToPdfRoute,
   MergeRoute: MergeRoute,
   OmniRoute: OmniRoute,
+  OrganizeRoute: OrganizeRoute,
   PdfToTextRoute: PdfToTextRoute,
   SplitRoute: SplitRoute,
   ViewerRoute: ViewerRoute,
