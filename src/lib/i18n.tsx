@@ -31,7 +31,7 @@ const dict = {
   theme_dark: { ar: "الوضع الليلي", en: "Dark mode" },
   theme_light: { ar: "الوضع النهاري", en: "Light mode" },
   open_menu: { ar: "فتح القائمة", en: "Open menu" },
-  signature_credit: { ar: "تطوير يحيى اليعمري", en: "by Yahya Elyamri" },
+  signature_credit: { ar: "by yahya elyamri", en: "by yahya elyamri" },
   install_app: { ar: "تثبيت التطبيق", en: "Install App" },
   install_ios_hint: {
     ar: "لتثبيت التطبيق: اضغط على زر المشاركة في سفاري، ثم اختر «إضافة إلى الشاشة الرئيسية».",
