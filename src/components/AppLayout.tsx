@@ -3,6 +3,7 @@ import {
   Droplets,
   FileText,
   Hash,
+  Heart,
   Minimize2,
   RotateCw,
   Files,
