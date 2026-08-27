@@ -3,6 +3,7 @@ import {
   Droplets,
   FileText,
   Hash,
+  Heart,
   Minimize2,
   RotateCw,
   Files,
@@ -74,6 +75,12 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         })}
       </nav>
 
+      <div className="mt-auto rounded-2xl border border-sidebar-border bg-sidebar-accent/50 p-4">
+        <p className="flex items-center gap-2 text-xs font-semibold text-sidebar-foreground">
+          <Heart className="size-3.5 fill-primary text-primary" />
+          {t("signature_credit")}
+        </p>
+      </div>
     </div>
   );
 }
@@ -145,6 +152,13 @@ export function AppLayout({ children }: { children: ReactNode }) {
         </header>
 
         <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">{children}</main>
+
+        <footer className="border-t border-border px-4 py-4 text-center sm:px-6 lg:px-8">
+          <p className="flex items-center justify-center gap-2 text-xs font-medium text-muted-foreground">
+            <Heart className="size-3.5 fill-primary text-primary" />
+            {t("signature_credit")}
+          </p>
+        </footer>
       </div>
     </div>
   );
