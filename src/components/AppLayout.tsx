@@ -75,6 +75,12 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         })}
       </nav>
 
+      <div className="mt-auto rounded-2xl border border-sidebar-border bg-sidebar-accent/50 p-4">
+        <p className="flex items-center gap-2 text-xs font-semibold text-sidebar-foreground">
+          <Heart className="size-3.5 fill-primary text-primary" />
+          {t("signature_credit")}
+        </p>
+      </div>
     </div>
   );
 }
