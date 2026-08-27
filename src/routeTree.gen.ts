@@ -16,7 +16,9 @@ import { Route as MergeRouteImport } from './routes/merge'
 import { Route as OmniRouteImport } from './routes/omni'
 import { Route as OrganizeRouteImport } from './routes/organize'
 import { Route as PdfToTextRouteImport } from './routes/pdf-to-text'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SplitRouteImport } from './routes/split'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ViewerRouteImport } from './routes/viewer'
 import { Route as WatermarkRouteImport } from './routes/watermark'
 
@@ -55,9 +57,19 @@ const PdfToTextRoute = PdfToTextRouteImport.update({
   path: '/pdf-to-text',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SplitRoute = SplitRouteImport.update({
   id: '/split',
   path: '/split',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ViewerRoute = ViewerRouteImport.update({
@@ -79,7 +91,9 @@ export interface FileRoutesByFullPath {
   '/omni': typeof OmniRoute
   '/organize': typeof OrganizeRoute
   '/pdf-to-text': typeof PdfToTextRoute
+  '/privacy': typeof PrivacyRoute
   '/split': typeof SplitRoute
+  '/terms': typeof TermsRoute
   '/viewer': typeof ViewerRoute
   '/watermark': typeof WatermarkRoute
 }
@@ -91,7 +105,9 @@ export interface FileRoutesByTo {
   '/omni': typeof OmniRoute
   '/organize': typeof OrganizeRoute
   '/pdf-to-text': typeof PdfToTextRoute
+  '/privacy': typeof PrivacyRoute
   '/split': typeof SplitRoute
+  '/terms': typeof TermsRoute
   '/viewer': typeof ViewerRoute
   '/watermark': typeof WatermarkRoute
 }
@@ -104,7 +120,9 @@ export interface FileRoutesById {
   '/omni': typeof OmniRoute
   '/organize': typeof OrganizeRoute
   '/pdf-to-text': typeof PdfToTextRoute
+  '/privacy': typeof PrivacyRoute
   '/split': typeof SplitRoute
+  '/terms': typeof TermsRoute
   '/viewer': typeof ViewerRoute
   '/watermark': typeof WatermarkRoute
 }
@@ -118,7 +136,9 @@ export interface FileRouteTypes {
     | '/omni'
     | '/organize'
     | '/pdf-to-text'
+    | '/privacy'
     | '/split'
+    | '/terms'
     | '/viewer'
     | '/watermark'
   fileRoutesByTo: FileRoutesByTo
@@ -130,7 +150,9 @@ export interface FileRouteTypes {
     | '/omni'
     | '/organize'
     | '/pdf-to-text'
+    | '/privacy'
     | '/split'
+    | '/terms'
     | '/viewer'
     | '/watermark'
   id:
@@ -142,7 +164,9 @@ export interface FileRouteTypes {
     | '/omni'
     | '/organize'
     | '/pdf-to-text'
+    | '/privacy'
     | '/split'
+    | '/terms'
     | '/viewer'
     | '/watermark'
   fileRoutesById: FileRoutesById
@@ -155,7 +179,9 @@ export interface RootRouteChildren {
   OmniRoute: typeof OmniRoute
   OrganizeRoute: typeof OrganizeRoute
   PdfToTextRoute: typeof PdfToTextRoute
+  PrivacyRoute: typeof PrivacyRoute
   SplitRoute: typeof SplitRoute
+  TermsRoute: typeof TermsRoute
   ViewerRoute: typeof ViewerRoute
   WatermarkRoute: typeof WatermarkRoute
 }
@@ -211,11 +237,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PdfToTextRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/split': {
       id: '/split'
       path: '/split'
       fullPath: '/split'
       preLoaderRoute: typeof SplitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/viewer': {
@@ -243,7 +283,9 @@ const rootRouteChildren: RootRouteChildren = {
   OmniRoute: OmniRoute,
   OrganizeRoute: OrganizeRoute,
   PdfToTextRoute: PdfToTextRoute,
+  PrivacyRoute: PrivacyRoute,
   SplitRoute: SplitRoute,
+  TermsRoute: TermsRoute,
   ViewerRoute: ViewerRoute,
   WatermarkRoute: WatermarkRoute,
 }

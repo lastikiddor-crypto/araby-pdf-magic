@@ -32,22 +32,21 @@ export const Route = createFileRoute("/terms")({
 
 function Section({
   titleAr,
-  childrenAr,
   titleEn,
-  childrenEn,
+  children,
 }: {
   titleAr: string;
-  childrenAr: React.ReactNode;
   titleEn: string;
-  childrenEn: React.ReactNode;
+  children: React.ReactNode;
 }) {
+  const [ar, en] = Array.isArray(children) ? children : [children, null];
   return (
     <section className="rounded-2xl border border-border bg-card p-5 sm:p-6">
       <h2 className="text-lg font-bold text-foreground">{titleAr}</h2>
-      <div className="mt-2 space-y-2 text-sm leading-7 text-muted-foreground">{childrenAr}</div>
+      <div className="mt-2 space-y-2 text-sm leading-7 text-muted-foreground">{ar}</div>
       <div dir="ltr" className="mt-5 border-t border-border pt-4 text-left">
         <h3 className="text-base font-semibold text-foreground">{titleEn}</h3>
-        <div className="mt-2 space-y-2 text-sm leading-6 text-muted-foreground">{childrenEn}</div>
+        <div className="mt-2 space-y-2 text-sm leading-6 text-muted-foreground">{en}</div>
       </div>
     </section>
   );
