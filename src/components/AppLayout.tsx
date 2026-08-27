@@ -152,6 +152,13 @@ export function AppLayout({ children }: { children: ReactNode }) {
         </header>
 
         <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">{children}</main>
+
+        <footer className="border-t border-border px-4 py-4 text-center sm:px-6 lg:px-8">
+          <p className="flex items-center justify-center gap-2 text-xs font-medium text-muted-foreground">
+            <Heart className="size-3.5 fill-primary text-primary" />
+            {t("signature_credit")}
+          </p>
+        </footer>
       </div>
     </div>
   );
